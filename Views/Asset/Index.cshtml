@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AssetIQ.Models.Domain.Asset>
+
+<h2>Assets</h2>
+
+<a href="/Asset/Create" class="btn btn-success mb-2">Add Asset</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Purchase Date</th>
+            <th>Price</th>
+            <th>Assigned</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var asset in Model)
+        {
+            <tr>
+                <td>@asset.Name</td>
+                <td>@asset.Category</td>
+                <td>@asset.PurchaseDate.ToShortDateString()</td>
+                <td>@asset.Price</td>
+                <td>@asset.IsAssigned</td>
+                <td>
+                    <a href="/Asset/Edit/@asset.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@asset.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this asset?');">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
