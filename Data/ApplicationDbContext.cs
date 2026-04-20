@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using AssetIQ.Models.Domain;
 
 namespace AssetIQ.Data
 {
@@ -9,6 +10,6 @@ namespace AssetIQ.Data
         {
         }
 
-        // Tables will be added here later
+        public DbSet<Asset> Assets { get; set; }
     }
 }
