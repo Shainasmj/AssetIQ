@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using AssetIQ.Constants
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +9,9 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AssetIQ.styles.css" asp-append-version="true" />
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/dist/jquery.validate.unobtrusive.min.js"></script>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -27,6 +31,10 @@
                         </li>
                     </ul>
                 </div>
+                <span class="text-white">
+                    Welcome, @Context.Session.GetString(SessionConstants.Username) (@Context.Session.GetString(SessionConstants.UserRole))
+                </span>
+                <a href="/Auth/Logout" class="btn btn-danger">Logout</a>
             </div>
         </nav>
     </header>

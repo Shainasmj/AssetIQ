@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using AssetIQ.Models.ViewModels;
 using AssetIQ.Models.Domain;
+using AssetIQ.Helpers;
 
 namespace AssetIQ.Controllers
 {
+    [AuthorizeUser]
     public class AssetController : Controller
     {
         private readonly IAssetService _assetService;
@@ -20,12 +22,14 @@ namespace AssetIQ.Controllers
             return View(assets);
         }
 
+        [AuthorizeUser(Role = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [AuthorizeUser(Role = "Admin")]
         public async Task<IActionResult> Create(AssetViewModel model)
         {
             if (!ModelState.IsValid)
@@ -48,6 +52,7 @@ namespace AssetIQ.Controllers
             return RedirectToAction("Index");
         }
 
+        [AuthorizeUser(Role = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var asset = await _assetService.GetByIdAsync(id);
@@ -71,6 +76,7 @@ namespace AssetIQ.Controllers
         }
 
         [HttpPost]
+        [AuthorizeUser(Role = "Admin")]
         public async Task<IActionResult> Edit(AssetViewModel model)
         {
             if (!ModelState.IsValid)
@@ -93,6 +99,7 @@ namespace AssetIQ.Controllers
         }
 
         [HttpPost]
+        [AuthorizeUser(Role = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {

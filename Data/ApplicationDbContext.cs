@@ -11,5 +11,6 @@ namespace AssetIQ.Data
         }
 
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
